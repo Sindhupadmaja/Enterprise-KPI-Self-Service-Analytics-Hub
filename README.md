@@ -24,5 +24,4 @@ See `governance/kpi_catalog.md`.
 ## Security
 See `governance/row_level_security.md`.
 
-## Production thinking
-This project intentionally documents operational controls even though it is a portfolio prototype. Do not claim a real production deployment unless you actually deploy it.
+

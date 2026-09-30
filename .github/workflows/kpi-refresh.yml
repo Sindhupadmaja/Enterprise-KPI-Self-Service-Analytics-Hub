@@ -1,0 +1,29 @@
+name: KPI refresh
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 11 * * 1-5"   # automated refresh every weekday at 11:00 UTC (7:00 ET)
+  workflow_dispatch:         # "Run workflow" button for an on-demand refresh
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Run tests
+        run: pytest -v
+      - name: Refresh KPIs (stops here if a blocking quality check fails)
+        run: python -m kpi_hub.pipeline
+      - name: Publish dashboard, KPI extract and refresh log
+        uses: actions/upload-artifact@v4
+        with:
+          name: kpi-dashboard-${{ github.run_number }}
+          path: output/

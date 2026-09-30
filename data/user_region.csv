@@ -1,0 +1,9 @@
+UserEmail,Region
+west.manager@example.com,West
+east.manager@example.com,East
+north.manager@example.com,North
+south.manager@example.com,South
+cfo@example.com,West
+cfo@example.com,East
+cfo@example.com,North
+cfo@example.com,South
